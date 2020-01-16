@@ -1,10 +1,10 @@
 package org.acme.quickstart.POJO;
 
-public class ResponceClient {
+public class ResponseClient {
     private String token;
     private String nameClient;
 
-    public ResponceClient() {
+    public ResponseClient() {
     }
 
     public String getToken() {

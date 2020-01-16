@@ -1,7 +1,7 @@
 package org.acme.quickstart;
 
 import org.acme.quickstart.POJO.RequestClient;
-import org.acme.quickstart.POJO.ResponceClient;
+import org.acme.quickstart.POJO.ResponseClient;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -21,7 +21,7 @@ public class GreetingResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/doLogin")
     public Response getClient(RequestClient requestClient){
-        ResponceClient responceClient = new ResponceClient();
+        ResponseClient responceClient = new ResponseClient();
 
         String login = requestClient.getLogin();
         String password = requestClient.getPassword();
