@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 @QuarkusTest
 public class GreetingResourceTest {
 
-    //@Test
+    //@Role
     /*public void testHelloEndpoint() {
         given()
           .when().get("/login")
