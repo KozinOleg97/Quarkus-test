@@ -1,17 +1,21 @@
 package org.acme.quickstart.POJO;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class ResponseClient {
-    private String token;
+    private byte[] token;
     private String nameClient;
+
 
     public ResponseClient() {
     }
 
-    public String getToken() {
+    public byte[] getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(byte[] token) {
         this.token = token;
     }
 

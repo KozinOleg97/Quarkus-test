@@ -1,52 +1,75 @@
 package org.acme.quickstart.Core;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.acme.quickstart.Entity.Account;
+import org.acme.quickstart.Entity.Role;
+import org.acme.quickstart.Entity.TAccount;
+import org.acme.quickstart.Entity.TRole;
 import org.acme.quickstart.POJO.ResponseClient;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
+@ApplicationScoped
 public class RegistrationHandler {
 
     @Inject
     ResponseClient responseClient;
+    TAccount account;
+    TRole role;
 
-    public ResponseClient doRegistrate(String login, String password) throws NoSuchAlgorithmException {
+    public ResponseClient doRegister(String login, String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
         if (checkLogin(login)) {
-            MessageDigest hashPass = doHash(password);
+            byte[] hashPass = doHash(password);
             addNewAccount(login, hashPass);
 
             responseClient.setNameClient(login);
-            responseClient.setToken(hashPass.toString());
+            responseClient.setToken(hashPass);
+            return responseClient;
+        }else {
+            responseClient.setNameClient(login);
+            responseClient.setToken(null);
             return responseClient;
         }
-        return null;
+
     }
 
     //TODO add exception
-    @Transactional
-    private void addNewAccount(String login, MessageDigest hashPass) {
+    private void addNewAccount(String login, byte[] hashPass) {
 
-        Account account = new Account();
+        List<PanacheEntityBase> roleList = TRole.listAll();
+
+
+
+        TAccount account = new TAccount();
         account.login = login;
-        account.password_hash = hashPass.toString();
-        account.role = null;
+        account.password_hash = hashPass;
+        account.role = (TRole) roleList.get(0);
         account.persist();
     }
 
     private boolean checkLogin(String login) {
-        long count = Account.count("login", login);
+        long count = TAccount.count("login", login);
         if (count == 0) {
             return true;
         } else return false;
     }
 
-    private MessageDigest doHash(String str) throws NoSuchAlgorithmException {
-        MessageDigest md5 = MessageDigest.getInstance(str);
-        return md5;
+    public byte[] doHash(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+
+        byte[] bytesOfMessage = str.getBytes("UTF-8");
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] theDigest = md.digest(bytesOfMessage);
+
+        //MessageDigest md5 = MessageDigest.getInstance(str);
+        return theDigest;
     }
 
 }

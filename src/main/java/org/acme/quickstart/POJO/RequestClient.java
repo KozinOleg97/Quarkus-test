@@ -1,5 +1,8 @@
 package org.acme.quickstart.POJO;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class RequestClient {
 
     private String login;

@@ -34,7 +34,7 @@ public class GreetingResource{
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/doLogin")
     public Response getClient(RequestClient requestClient){
-        ResponseClient responceClient = new ResponseClient();
+       /* ResponseClient responceClient = new ResponseClient();
 
         String login = requestClient.getLogin();
         String password = requestClient.getPassword();
@@ -45,7 +45,8 @@ public class GreetingResource{
         responceClient.setToken(token);
 
 
-        return Response.ok(responceClient).build();
+        return Response.ok(responceClient).build();*/
+       return null;
 
     }
 

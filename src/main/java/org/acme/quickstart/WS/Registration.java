@@ -6,13 +6,11 @@ import org.acme.quickstart.POJO.RequestClient;
 import org.acme.quickstart.POJO.ResponseClient;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.transaction.Transactional;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-
 @Path("/reg")
 public class Registration {
 
@@ -23,23 +21,27 @@ public class Registration {
      * Test method
      * @return
      */
+
     @GET
+
     @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
     public ResponseClient Register() {
         try {
 
             RequestClient requestClient = new RequestClient();
-            requestClient.setLogin("NewUser1");
+            requestClient.setLogin("NewUser2");
             requestClient.setPassword("qwe");
 
-            ResponseClient responseClient = handler.doRegistrate(
+
+            ResponseClient responseClient = handler.doRegister(
                     requestClient.getLogin(),
                     requestClient.getPassword()
             );
 
             return responseClient;
 
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;
         }
@@ -47,18 +49,19 @@ public class Registration {
 
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseClient Register(RequestClient requestClient) {
         try {
 
-            ResponseClient responseClient = handler.doRegistrate(
+            ResponseClient responseClient = handler.doRegister(
                     requestClient.getLogin(),
                     requestClient.getPassword()
             );
 
             return responseClient;
 
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;
         }
