@@ -21,9 +21,6 @@ public class GreetingResource{
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
 
-
-
-
         return "Работает!! \n при push этого репа https://github.com/KozinOleg97/Quarkus-test" +
                 " автоматом собирается контейнер на докерхабе, дальше (ПОКА вручную) нужно \n" +
                 "  на виртуалке скачать образ и запустить (2 комманды)";
