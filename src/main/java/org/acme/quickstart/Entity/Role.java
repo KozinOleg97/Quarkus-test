@@ -1,29 +1,20 @@
 package org.acme.quickstart.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
+@ApplicationScoped
 @Entity
 public class Role extends PanacheEntity {
 
-    public String description;
+    @Column(unique = true, nullable = false)
+    public String name;
 
-    @OneToMany(mappedBy = "role")
-    public Set<TAccount> accounts = new HashSet<TAccount>();
-
-
-    /*@ManyToOne
-    @JoinColumn(name = "role", nullable = false, unique = true)
-    public Account account;*/
-
-    /*public RoleType type;
-    public enum RoleType{
-        admin, base;
-    }*/
-
+    //TODO разобраться с lazy fetch
+    @OneToMany(mappedBy = "role",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    public List<Account> accounts;
 
 }

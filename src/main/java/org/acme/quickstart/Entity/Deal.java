@@ -9,11 +9,18 @@ import javax.persistence.ManyToOne;
 
 @ApplicationScoped
 @Entity
-public class TAccount extends PanacheEntity {
-    public String login;
-    public byte[] password_hash;
+public class Deal extends PanacheEntity {
 
     @ManyToOne
     @JoinColumn
-    public TRole role;
+    public Auto auto;
+
+    @ManyToOne
+    @JoinColumn
+    public Box box;
+
+    @ManyToOne
+    @JoinColumn
+    public Account account;
+
 }

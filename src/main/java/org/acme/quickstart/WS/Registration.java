@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+
 @Path("/reg")
 public class Registration {
 
@@ -19,6 +20,7 @@ public class Registration {
 
     /**
      * Test method
+     *
      * @return
      */
 
@@ -34,10 +36,7 @@ public class Registration {
             requestClient.setPassword("qwe");
 
 
-            ResponseClient responseClient = handler.doRegister(
-                    requestClient.getLogin(),
-                    requestClient.getPassword()
-            );
+            ResponseClient responseClient = handler.doRegister(requestClient);
 
             return responseClient;
 
@@ -49,15 +48,13 @@ public class Registration {
 
 
     @POST
+    @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public ResponseClient Register(RequestClient requestClient) {
         try {
 
-            ResponseClient responseClient = handler.doRegister(
-                    requestClient.getLogin(),
-                    requestClient.getPassword()
-            );
+            ResponseClient responseClient = handler.doRegister(requestClient);
 
             return responseClient;
 

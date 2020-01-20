@@ -3,8 +3,6 @@ package org.acme.quickstart;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.acme.quickstart.Entity.Account;
 import org.acme.quickstart.Entity.Role;
-import org.acme.quickstart.Entity.TAccount;
-import org.acme.quickstart.Entity.TRole;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.GET;
@@ -25,7 +23,7 @@ public class Test {
     @Produces(MediaType.APPLICATION_JSON)
     public List<PanacheEntityBase> getTest() {
 
-        return TAccount.listAll();
+        return Account.listAll();
 
     }
 
@@ -43,7 +41,7 @@ public class Test {
 
         Account account = new Account();
         account.login = "admin";
-        account.password_hash = "1";
+        //account.password_hash = "1";
         //account.role = Account.Role.admin;
         account.persist();
 
@@ -54,26 +52,26 @@ public class Test {
     @GET
     @Path("/qwe")
     @Produces(MediaType.APPLICATION_JSON)
-    public TAccount test3() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public Account test3() throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
-       /* TRole tRole = new TRole();
+       /* Role tRole = new Role();
         tRole.name = "admin";
         tRole.persist();*/
 
-        List<PanacheEntityBase> roles = TRole.listAll();
+        List<PanacheEntityBase> roles = Role.listAll();
 
 
         RegistrationHandler handler = new RegistrationHandler();
 
 
-        TAccount TAccount = new TAccount();
-        TAccount.login = "admin";
-        TAccount.password_hash = handler.doHash( "admin");
-        TAccount.role = (TRole) roles.get(0);
+        Account Account = new Account();
+        Account.login = "admin";
+        Account.password_hash = handler.doHash( "admin");
+        Account.role = (Role) roles.get(0);
 
-        TAccount.persist();
+        Account.persist();
 
-        return TAccount;
+        return Account;
     }
 
 }
