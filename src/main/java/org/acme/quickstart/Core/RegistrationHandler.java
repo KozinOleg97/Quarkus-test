@@ -24,10 +24,7 @@ public class RegistrationHandler {
 
     @Inject
     ResponseClient responseClient;
-    Account account;
-    Role role;
-    Wallet wallet;
-    PersonMainData personMainData;
+
 
 
     final String BASE_ROLE = "client";
