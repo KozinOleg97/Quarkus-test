@@ -1,22 +1,18 @@
 package org.acme.quickstart.Core;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
-import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import org.acme.quickstart.Entity.Account;
 import org.acme.quickstart.Entity.PersonMainData;
 import org.acme.quickstart.Entity.Role;
 import org.acme.quickstart.Entity.Wallet;
-import org.acme.quickstart.POJO.RequestClient;
-import org.acme.quickstart.POJO.ResponseClient;
+import org.acme.quickstart.Beans.Registration.RequestClient;
+import org.acme.quickstart.Beans.Registration.ResponseClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Optional;
 
 @ApplicationScoped
 public class RegistrationHandler {
@@ -30,7 +26,7 @@ public class RegistrationHandler {
     final String BASE_ROLE = "client";
 
 
-    public ResponseClient doRegister(RequestClient requestClient) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    /*public ResponseClient doRegister(RequestClient requestClient) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 
 
         if (checkLogin(requestClient.getLogin())) {
@@ -46,11 +42,11 @@ public class RegistrationHandler {
             return responseClient;
         }
 
-    }
+    }*/
 
     //TODO add exception
 
-    private void addNewAccount(RequestClient data) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public void addNewAccount(RequestClient data) throws UnsupportedEncodingException, NoSuchAlgorithmException {
 
         //List<PanacheEntityBase> roleList = Role.listAll();
 
@@ -81,7 +77,7 @@ public class RegistrationHandler {
 
 
         //account.wallet =
-        // account.persist();
+         account.persist();
     }
 
     public Role selectRole(String inputRole) {
@@ -104,7 +100,7 @@ public class RegistrationHandler {
 
     }
 
-    private boolean checkLogin(String login) {
+    public boolean checkLogin(String login) {
         long count = Account.count("login", login);
         if (count == 0) {
             return true;

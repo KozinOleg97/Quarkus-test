@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-@ApplicationScoped
 @Entity
 public class Wallet extends PanacheEntity {
     public int deposit;
@@ -18,6 +17,6 @@ public class Wallet extends PanacheEntity {
     public boolean is_active;
 
 
-    @OneToMany(mappedBy = "wallet",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "wallet",cascade = CascadeType.ALL)
     public List<Account> accounts;
 }

@@ -9,13 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-@ApplicationScoped
 @Entity
 public class PersonMainData extends PanacheEntity {
 
     public String Name;
     public String Surname;
 
-    @OneToMany(mappedBy = "main_data",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "main_data",cascade = CascadeType.ALL)
     public List<Account> accounts;
 }

@@ -1,4 +1,4 @@
-package org.acme.quickstart.POJO;
+package org.acme.quickstart.Beans.Registration;
 
 import javax.enterprise.context.ApplicationScoped;
 

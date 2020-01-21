@@ -1,4 +1,4 @@
-package org.acme.quickstart.POJO;
+package org.acme.quickstart.Beans.Login;
 
 import javax.enterprise.context.ApplicationScoped;
 

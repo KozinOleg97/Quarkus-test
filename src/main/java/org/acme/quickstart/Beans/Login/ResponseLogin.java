@@ -1,4 +1,4 @@
-package org.acme.quickstart.POJO;
+package org.acme.quickstart.Beans.Login;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -9,6 +9,9 @@ public class ResponseLogin {
     private byte[] token;
     private String role;
 
+
+    public ResponseLogin() {
+    }
 
     public Boolean getResult() {
         return result;

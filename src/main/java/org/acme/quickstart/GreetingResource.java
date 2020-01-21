@@ -1,15 +1,10 @@
 package org.acme.quickstart;
 
-import io.agroal.api.AgroalDataSource;
-import org.acme.quickstart.Core.RegistrationHandler;
-import org.acme.quickstart.POJO.RequestClient;
-import org.acme.quickstart.POJO.ResponseClient;
+import org.acme.quickstart.Beans.Registration.RequestClient;
 
-import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("/login")
 public class GreetingResource{
