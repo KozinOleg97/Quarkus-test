@@ -6,6 +6,7 @@ import org.acme.quickstart.Beans.Login.ResponseLogin;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -20,16 +21,15 @@ public class LoginHandler {
     }
 
 
-    public byte[] doHash(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public byte[] doHash(String str) throws NoSuchAlgorithmException {
 
 
-        byte[] bytesOfMessage = str.getBytes("UTF-8");
+        byte[] bytesOfMessage = str.getBytes(StandardCharsets.UTF_8);
 
         MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] theDigest = md.digest(bytesOfMessage);
 
         //MessageDigest md5 = MessageDigest.getInstance(str);
-        return theDigest;
+        return md.digest(bytesOfMessage);
 
     }
 
@@ -39,8 +39,13 @@ public class LoginHandler {
         Account res = Account.find("login = ?1 and password_hash = ?2",
                 login, token).firstResult();
 
-        if (res != null){
-            return true;
-        }else return false;
+        return res != null;
+    }
+
+    public boolean checkAccountExist(String login , byte[] hash) {
+        Account res = Account.find("login = ?1 and password_hash = ?2",
+                login, hash).firstResult();
+
+        return res != null;
     }
 }

@@ -10,6 +10,7 @@ import org.acme.quickstart.Beans.Registration.ResponseClient;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -22,36 +23,16 @@ public class RegistrationHandler {
     ResponseClient responseClient;
 
 
-
     final String BASE_ROLE = "client";
 
+     RegistrationHandler() {
+    }
 
-    /*public ResponseClient doRegister(RequestClient requestClient) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-
-
-        if (checkLogin(requestClient.getLogin())) {
-
-            addNewAccount(requestClient);
-
-            responseClient.setNameClient(requestClient.getLogin());
-            responseClient.setToken(doHash(requestClient.getPassword()));
-            return responseClient;
-        } else {
-            responseClient.setNameClient(requestClient.getLogin());
-            responseClient.setToken(null);
-            return responseClient;
-        }
-
-    }*/
 
     //TODO add exception
 
-    public void addNewAccount(RequestClient data) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public void addNewAccount(RequestClient data) throws NoSuchAlgorithmException {
 
-        //List<PanacheEntityBase> roleList = Role.listAll();
-
-
-        //Role panacheEntityBase = (Role) roleList.get(0);
 
         Wallet wallet = new Wallet();
         wallet.is_active = false;
@@ -69,25 +50,22 @@ public class RegistrationHandler {
         account.login = data.getLogin();
         account.password_hash = doHash(data.getPassword());
         account.role = selectRole(data.getRole());
-        ;//  (Role) roleList.get(0);
 
-        //account.simple_role =
         account.wallet = wallet;
         account.main_data = personMainData;
 
 
-        //account.wallet =
-         account.persist();
+        account.persist();
     }
 
-    public Role selectRole(String inputRole) {
+    private Role selectRole(String inputRole) {
 
         List<Role> roleList = Role.listAll();
 
         Role resRole = null;
 
         for (Role curRole : roleList) {
-            if (curRole.name == inputRole) {
+            if (curRole.name.equals(inputRole)) {
                 resRole = curRole;
             }
         }
@@ -102,21 +80,17 @@ public class RegistrationHandler {
 
     public boolean checkLogin(String login) {
         long count = Account.count("login", login);
-        if (count == 0) {
-            return true;
-        } else return false;
+        return count == 0;
     }
 
-    public byte[] doHash(String str) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public byte[] doHash(String str) throws NoSuchAlgorithmException {
 
 
-        byte[] bytesOfMessage = str.getBytes("UTF-8");
+        byte[] bytesOfMessage = str.getBytes(StandardCharsets.UTF_8);
 
         MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] theDigest = md.digest(bytesOfMessage);
 
-        //MessageDigest md5 = MessageDigest.getInstance(str);
-        return theDigest;
+        return md.digest(bytesOfMessage);
 
     }
 

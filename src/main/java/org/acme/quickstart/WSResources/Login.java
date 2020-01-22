@@ -28,12 +28,13 @@ public class Login {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response Login(RequestLogin requestLogin) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public Response doLogin(RequestLogin requestLogin) throws NoSuchAlgorithmException {
 
         byte[] hash = handler.doHash(requestLogin.getPassword());
 
         Account res = Account.find("login = ?1 and password_hash = ?2",
                 requestLogin.getLogin(), hash).firstResult();
+
 
         if (res != null) {
             responseLogin.setResult(true);
@@ -42,7 +43,8 @@ public class Login {
             return Response.ok(responseLogin).build();
         } else {
             responseLogin.setResult(false);
-            //responseLogin.setToken(hash);
+            responseLogin.setToken(null);
+            responseLogin.setRole(null);
             return Response.ok(responseLogin).build();
         }
     }

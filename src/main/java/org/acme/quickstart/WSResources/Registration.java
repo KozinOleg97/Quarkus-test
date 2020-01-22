@@ -40,7 +40,7 @@ public class Registration {
                 return Response.ok(responseClient).build();
             }
 
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
         }
