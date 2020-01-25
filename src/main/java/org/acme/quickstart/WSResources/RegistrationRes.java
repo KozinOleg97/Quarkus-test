@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 @Path("/reg")
-public class Registration {
+public class RegistrationRes {
 
     @Inject
     RegistrationHandler handler;

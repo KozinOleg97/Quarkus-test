@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
 
 @Path("log")
 @ApplicationScoped
-public class Login {
+public class LoginRes {
 
     @Inject
     ResponseLogin responseLogin;

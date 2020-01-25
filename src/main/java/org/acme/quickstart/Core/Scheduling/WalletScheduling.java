@@ -1,4 +1,4 @@
-package org.acme.quickstart.Core;
+package org.acme.quickstart.Core.Scheduling;
 
 import io.quarkus.scheduler.Scheduled;
 import org.acme.quickstart.Entity.Deal;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class WalletScheduling {
 
-    @Scheduled(every = "10s")
+    @Scheduled(every = "60s")
     @Transactional
     public void calcWallets() {
 
@@ -18,10 +18,11 @@ public class WalletScheduling {
 
 
         List<Deal> dealList = Deal.list("status", true);
+
         for (Deal aDeal : dealList) {
             Wallet wallet = aDeal.account.wallet;
 
-            wallet.outlay = wallet.outlay - 5;
+            wallet.outlay = wallet.outlay - 1;
             wallet.persist();
         }
 

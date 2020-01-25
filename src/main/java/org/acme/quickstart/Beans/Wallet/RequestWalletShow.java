@@ -1,17 +1,13 @@
-package org.acme.quickstart.Beans.Deals;
+package org.acme.quickstart.Beans.Wallet;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class RequestDealCreate {
+public class RequestWalletShow {
+
 
     private String login;
     private String password;
-    private String box_id;
-
-
-    public RequestDealCreate() {
-    }
 
 
     public String getLogin() {
@@ -28,13 +24,5 @@ public class RequestDealCreate {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getBox_id() {
-        return box_id;
-    }
-
-    public void setBox_id(String box_id) {
-        this.box_id = box_id;
     }
 }

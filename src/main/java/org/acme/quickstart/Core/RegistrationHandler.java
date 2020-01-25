@@ -35,7 +35,7 @@ public class RegistrationHandler {
 
 
         Wallet wallet = new Wallet();
-        wallet.is_active = false;
+        wallet.is_active = true;
         wallet.deposit = 0;
         wallet.outlay = 0;
         wallet.persist();

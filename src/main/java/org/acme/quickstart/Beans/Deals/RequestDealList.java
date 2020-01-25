@@ -6,7 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 public class RequestDealList {
 
     private String login;
-    private byte[] token;
+    private String password;
 
     public String getLogin() {
         return login;
@@ -16,11 +16,11 @@ public class RequestDealList {
         this.login = login;
     }
 
-    public byte[] getToken() {
-        return token;
+    public String getPassword() {
+        return password;
     }
 
-    public void setToken(byte[] token) {
-        this.token = token;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
