@@ -1,5 +1,6 @@
 package org.acme.quickstart.WSResources;
 
+import io.quarkus.security.identity.SecurityIdentity;
 import org.acme.quickstart.Core.LoginHandler;
 import org.acme.quickstart.Entity.Account;
 import org.acme.quickstart.Entity.Deal;
@@ -22,6 +23,8 @@ public class Deals {
     LoginHandler loginHandler;
     @Inject
     ResponseDealList dealListRes;
+    @Inject
+    SecurityIdentity securityIdentity;
 
     @Path("/create")
     @POST
@@ -31,6 +34,8 @@ public class Deals {
 
         return null;
     }
+
+
 
     @Path("/show")
     @POST
