@@ -1,12 +1,12 @@
 package org.acme.quickstart.WSResources;
 
-import io.quarkus.security.identity.SecurityIdentity;
+
 import org.acme.quickstart.Beans.Box.RequestBoxAdd;
 import org.acme.quickstart.Beans.Box.ResponseBoxAdd;
 import org.acme.quickstart.Core.BoxHandler;
 import org.acme.quickstart.Entity.Box;
 
-import javax.annotation.security.RolesAllowed;
+
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -20,7 +20,7 @@ public class BoxRes {
     ResponseBoxAdd boxAddRes;
     @Inject
     BoxHandler handler;
-    @Inject
+   /* @Inject
     SecurityIdentity securityIdentity;
 
 
@@ -35,7 +35,7 @@ public class BoxRes {
         public String getUserName() {
             return userName;
         }
-    }
+    }*/
 
     @Path("/add")
     //@RolesAllowed("client")
@@ -70,7 +70,7 @@ public class BoxRes {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response showBoxList() {
-        User user = new User(securityIdentity);
+
         return Response.ok(Box.listAll()).build();
 
     }

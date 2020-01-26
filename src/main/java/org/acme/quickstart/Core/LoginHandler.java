@@ -21,17 +21,25 @@ public class LoginHandler {
     }
 
 
-    public byte[] doHash(String str) throws NoSuchAlgorithmException {
+    public byte[] doHash(String str) {
 
 
         byte[] bytesOfMessage = str.getBytes(StandardCharsets.UTF_8);
 
-        MessageDigest md = MessageDigest.getInstance("MD5");
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Hash err");
+            return null;
+        }
 
         //MessageDigest md5 = MessageDigest.getInstance(str);
         return md.digest(bytesOfMessage);
 
     }
+
+
 
 
     public boolean checkToken(String login, byte[] token){
@@ -47,5 +55,13 @@ public class LoginHandler {
                 login, hash).firstResult();
 
         return res != null;
+    }
+
+    public boolean checkToken(String login, byte[] token, String role) {
+        Account res = Account.find("login = ?1 and password_hash = ?2 and role_id = ?3",
+                login, token, 1).firstResult();
+
+        return res != null;
+
     }
 }

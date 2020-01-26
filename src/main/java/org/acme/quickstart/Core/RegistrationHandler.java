@@ -45,7 +45,7 @@ public class RegistrationHandler {
         personMainData.Surname = data.getSurname();
         personMainData.persist();
 
-        byte[] hashPass = doHash(data.getPassword());
+        byte[] hashPass = doHash(data.getLogin() + data.getPassword());
         Account account = new Account();
         account.login = data.getLogin();
         account.password_hash = doHash(data.getPassword());
@@ -58,7 +58,7 @@ public class RegistrationHandler {
         account.persist();
     }
 
-    private Role selectRole(String inputRole) {
+    public Role selectRole(String inputRole) {
 
         List<Role> roleList = Role.listAll();
 

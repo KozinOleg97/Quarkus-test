@@ -3,12 +3,14 @@ package org.acme.quickstart.WSResources;
 
 import org.acme.quickstart.Beans.Deals.RequestDealList;
 import org.acme.quickstart.Beans.Wallet.RequestWalletShow;
+import org.acme.quickstart.Beans.Wallet.RequstWalletAddMoney;
 import org.acme.quickstart.Core.LoginHandler;
 import org.acme.quickstart.Entity.Account;
 import org.acme.quickstart.Entity.Deal;
 import org.acme.quickstart.Entity.Wallet;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -48,5 +50,33 @@ public class WalletRes {
 
 
     }
+
+    @Path("/addmoney")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response addMoney(RequstWalletAddMoney request) throws NoSuchAlgorithmException {
+
+        byte[] hash = loginHandler.doHash(request.getPassword());
+
+        String login = request.getLogin();
+
+        if (!loginHandler.checkToken(login, hash)) {
+            return Response.ok(null).build();
+        }
+
+        Account account = Account.find("login", login).firstResult();
+
+        Wallet wallet = account.wallet;
+
+        wallet.deposit += request.getMoney_to_add();
+        wallet.persist();
+
+        return Response.ok(true).build();
+
+
+    }
+
 
 }
