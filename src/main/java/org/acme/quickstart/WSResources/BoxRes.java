@@ -1,6 +1,7 @@
 package org.acme.quickstart.WSResources;
 
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.acme.quickstart.Beans.Box.RequestBoxAdd;
 import org.acme.quickstart.Beans.Box.ResponseBoxAdd;
 import org.acme.quickstart.Core.BoxHandler;
@@ -12,6 +13,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("/box")
 public class BoxRes {
@@ -72,6 +74,20 @@ public class BoxRes {
     public Response showBoxList() {
 
         return Response.ok(Box.listAll()).build();
+
+    }
+
+
+
+    @Path("/free")
+    //@RolesAllowed("client")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response showFreeBoxList() {
+        List<Box> freeBoxList = Box.list("state", true);
+        return Response.ok(freeBoxList).build();
 
     }
 }
