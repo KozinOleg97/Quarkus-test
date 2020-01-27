@@ -47,6 +47,9 @@ public class DealsRes {
             return null;
         }
 
+        box.state = false;
+        box.persist();
+
         Deal deal = new Deal();
         deal.account = account;
         deal.status = true;
