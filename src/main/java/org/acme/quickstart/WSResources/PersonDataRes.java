@@ -1,20 +1,13 @@
 package org.acme.quickstart.WSResources;
 
-import org.acme.quickstart.Beans.Deals.RequestDealList;
-import org.acme.quickstart.Beans.PersonMainData.RequestAllData;
-import org.acme.quickstart.Beans.PersonMainData.ResponseAllData;
-import org.acme.quickstart.Beans.PersonMainData.data;
+import org.acme.quickstart.Beans.Deals.RequestDealCreate;
+import org.acme.quickstart.Beans.PersonMainData.*;
 import org.acme.quickstart.Core.LoginHandler;
-import org.acme.quickstart.Entity.Account;
-import org.acme.quickstart.Entity.Deal;
-import org.acme.quickstart.Entity.PersonMainData;
-import org.acme.quickstart.Entity.Role;
+import org.acme.quickstart.Entity.*;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.transaction.Transactional;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.security.NoSuchAlgorithmException;
@@ -63,4 +56,49 @@ public class PersonDataRes {
 
 
     }
+
+    @Path("/roles")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response showFreeBoxList() {
+        List<Role> list = Role.listAll();
+        ResRoles resRoles= new ResRoles();
+        resRoles.setRoleList(list);
+        return Response.ok(resRoles).build();
+
+    }
+
+    @Path("/change")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Response createNewDeal(RequestChange request) throws NoSuchAlgorithmException {
+
+        byte[] hash = handler.doHash(request.getPassword());
+
+        Account account = Account.find("login = ?1 and password_hash = ?2",
+                request.getLogin(), hash).firstResult();
+
+
+
+
+
+        if (account == null) {
+            return null;
+        }
+        account.main_data.Name = request.getNewName();
+        account.main_data.Surname = request.getNewSurname();
+
+        account.persist();
+
+
+
+
+        return Response.ok(true).build();
+    }
+
+
 }
