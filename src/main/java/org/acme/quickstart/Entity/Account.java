@@ -15,6 +15,9 @@ public class Account extends PanacheEntity {
     @JsonbTransient
     public byte[] password_hash;
 
+    @JsonbTransient
+    public String password;
+
 
     @ManyToOne
     @JoinColumn
