@@ -14,8 +14,7 @@ public class Account extends PanacheEntity {
     //@JsonbTransient
     @JsonbTransient
     public byte[] password_hash;
-    @JsonbTransient
-    public String simple_role;
+
 
     @ManyToOne
     @JoinColumn
@@ -38,6 +37,13 @@ public class Account extends PanacheEntity {
     public List<Deal> deals;
 
 
+    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
+    @JsonbTransient
+    public List<Payment> payments;
+
+    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
+    @JsonbTransient
+    public List<Auto> autos;
 
 
 
