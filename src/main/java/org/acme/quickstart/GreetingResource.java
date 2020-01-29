@@ -2,44 +2,47 @@ package org.acme.quickstart;
 
 import org.acme.quickstart.Beans.Registration.RequestClient;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
-@Path("/login")
+@Path("/test")
 public class GreetingResource{
 
 
 
-
+    @Path("/adminrole")
+    @RolesAllowed("admin")
+    //@PermitAll
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
+    public String test1(@Context SecurityContext securityContext) {
 
-        return "Работает!! \n при push этого репа https://github.com/KozinOleg97/Quarkus-test" +
-                " автоматом собирается контейнер на докерхабе, дальше (ПОКА вручную) нужно \n" +
-                "  на виртуалке скачать образ и запустить (2 комманды)";
+        return "Запрос от: " + securityContext.getUserPrincipal().getName();
     }
 
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/doLogin")
-    public Response getClient(RequestClient requestClient){
-       /* ResponseClient responceClient = new ResponseClient();
 
-        String login = requestClient.getLogin();
-        String password = requestClient.getPassword();
+    @Path("/clientrole")
+    @RolesAllowed("client")
+    //@PermitAll
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String test2(@Context SecurityContext securityContext) {
 
-        String token = login + "@@@" + password;
-        String nameClient = "Denis Sokolov";
-        responceClient.setNameClient(nameClient);
-        responceClient.setToken(token);
+        return "Запрос от: " + securityContext.getUserPrincipal().getName();
+    }
 
+    @Path("/allrole")
+    @PermitAll
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String test3(@Context SecurityContext securityContext) {
 
-        return Response.ok(responceClient).build();*/
-       return null;
-
+        return "Запрос от: " + securityContext.getUserPrincipal().getName();
     }
 
 }
