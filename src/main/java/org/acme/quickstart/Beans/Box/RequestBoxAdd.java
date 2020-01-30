@@ -1,5 +1,6 @@
 package org.acme.quickstart.Beans.Box;
 
+
 public class RequestBoxAdd {
     private int row;
     private int col;

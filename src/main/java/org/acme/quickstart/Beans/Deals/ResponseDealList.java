@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @ApplicationScoped
+@Deprecated
 public class ResponseDealList {
 
      List<Deal> dealList;

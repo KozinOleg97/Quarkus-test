@@ -1,9 +1,14 @@
 package org.acme.quickstart.Beans.PersonMainData;
 
-public class data {
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
+public class ResponsePersonData {
     private String  name;
     private String surname;
-    private String role;
+
+    public ResponsePersonData() {
+    }
 
     public String getName() {
         return name;
@@ -19,13 +24,5 @@ public class data {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }

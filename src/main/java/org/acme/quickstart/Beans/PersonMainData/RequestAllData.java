@@ -3,6 +3,7 @@ package org.acme.quickstart.Beans.PersonMainData;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
+@Deprecated
 public class RequestAllData {
 
     private String login;

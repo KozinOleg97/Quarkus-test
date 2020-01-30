@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 
 @ApplicationScoped
+@Deprecated
 public class ResponseFreeBoxList {
 
     private     List<Box> boxList;

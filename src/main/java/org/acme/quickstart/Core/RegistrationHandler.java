@@ -1,15 +1,14 @@
 package org.acme.quickstart.Core;
 
+import org.acme.quickstart.Beans.Registration.RequestClient;
+import org.acme.quickstart.Beans.Registration.ResponseClient;
 import org.acme.quickstart.Entity.Account;
 import org.acme.quickstart.Entity.PersonMainData;
 import org.acme.quickstart.Entity.Role;
-
-import org.acme.quickstart.Beans.Registration.RequestClient;
-import org.acme.quickstart.Beans.Registration.ResponseClient;
+import org.acme.quickstart.Exceptions.NoSuchRole;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -31,7 +30,7 @@ public class RegistrationHandler {
 
     //TODO add exception
 
-    public void addNewAccount(RequestClient data) throws NoSuchAlgorithmException {
+    public void addNewAccount(RequestClient data) throws NoSuchRole {
 
         PersonMainData personMainData = new PersonMainData();
         personMainData.Name = "";
@@ -48,7 +47,7 @@ public class RegistrationHandler {
         account.persist();
     }
 
-    public Role selectRole(String inputRole) {
+    public Role selectRole(String inputRole) throws NoSuchRole {
 
         List<Role> roleList = Role.listAll();
 
@@ -61,7 +60,7 @@ public class RegistrationHandler {
         }
 
         if (resRole == null) {
-            resRole = roleList.get(1);
+            throw new NoSuchRole("Role select err", inputRole);
         }
 
         return resRole;

@@ -11,6 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @ApplicationScoped
+@Deprecated
 public class LoginHandler {
 
     @Inject

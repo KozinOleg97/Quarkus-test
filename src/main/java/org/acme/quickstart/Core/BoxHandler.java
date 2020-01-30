@@ -25,7 +25,7 @@ public class BoxHandler {
         Box box = new Box();
         box.row = row;
         box.col = col;
-        box.state = true;
+        box.occupied = true;
         box.persist();
 
     }

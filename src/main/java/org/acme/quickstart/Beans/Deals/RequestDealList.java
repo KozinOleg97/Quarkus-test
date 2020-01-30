@@ -3,6 +3,7 @@ package org.acme.quickstart.Beans.Deals;
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
+@Deprecated
 public class RequestDealList {
 
     private String login;

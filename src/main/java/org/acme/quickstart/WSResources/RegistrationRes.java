@@ -36,15 +36,12 @@ public class RegistrationRes {
                 responseClient.setComment("");
                 return Response.ok(responseClient).build();
             } else {
-//                responseClient.setResult(false);
-//                responseClient.setComment("Такой логин уже занят");
-//                return Response.ok(responseClient).build();
                 return Response.status(400).build();
             }
 
         } catch (Exception e) {
             //e.printStackTrace();
-            LOG.debug("Server error (Registration)", e);
+            LOG.error("Server error (registration)", e);
             return Response.status(500).build();
         }
     }

@@ -5,18 +5,8 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class RequestClient {
 
-    /*{
-    "login": "NewUser4",
-    "password": "NewUser3Pass",
-    "name": "Qwe",
-    "surname": "Asd",
-    "role": ""
-}*/
-
-
     private String login;
     private String password;
-
 
 
     public RequestClient() {

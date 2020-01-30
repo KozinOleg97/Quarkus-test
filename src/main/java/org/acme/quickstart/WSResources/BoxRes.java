@@ -1,14 +1,13 @@
 package org.acme.quickstart.WSResources;
 
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.acme.quickstart.Beans.Box.RequestBoxAdd;
 import org.acme.quickstart.Beans.Box.ResponseBoxAdd;
-import org.acme.quickstart.Beans.Box.ResponseFreeBoxList;
 import org.acme.quickstart.Core.BoxHandler;
 import org.acme.quickstart.Entity.Box;
 
-
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -17,41 +16,23 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/box")
-public class    BoxRes {
+public class BoxRes {
 
     @Inject
     ResponseBoxAdd boxAddRes;
     @Inject
     BoxHandler handler;
-    @Inject
-    ResponseFreeBoxList freeBoxList;
-   /* @Inject
-    SecurityIdentity securityIdentity;
+    //@Inject
+    //ResponseFreeBoxList freeBoxList;
 
-
-    public class User {
-
-        private final String userName;
-
-        User(SecurityIdentity securityIdentity) {
-            this.userName = securityIdentity.getPrincipal().getName();
-        }
-
-        public String getUserName() {
-            return userName;
-        }
-    }*/
 
     @Path("/add")
-    //@RolesAllowed("client")
+    @RolesAllowed("admin")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response addBox(RequestBoxAdd request) {
-
-
-
 
         if (handler.checkBoxExist(request.getRow(), request.getCol())) {
 
@@ -68,12 +49,10 @@ public class    BoxRes {
         }
     }
 
-    @Path("/all")
-    //@RolesAllowed("client")
+    @Path("/show/all")
+    @PermitAll
     @GET
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
     public Response showBoxList() {
 
         return Response.ok(Box.listAll()).build();
@@ -81,17 +60,14 @@ public class    BoxRes {
     }
 
 
-
-    @Path("/free")
-    //@RolesAllowed("client")
+    @Path("/show/free")
+    @PermitAll
     @GET
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
     public Response showFreeBoxList() {
-        List<Box> list = Box.list("state", true);
-        freeBoxList.setBoxList(list);
-        return Response.ok(freeBoxList).build();
+        List<Box> list = Box.list("occupied", true);
+        //freeBoxList.setBoxList(list);
+        return Response.ok(list).build();
 
     }
 }

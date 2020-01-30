@@ -1,22 +1,20 @@
 package org.acme.quickstart.Beans.PersonMainData;
 
-import org.acme.quickstart.Entity.Deal;
-import org.acme.quickstart.Entity.PersonMainData;
-
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 @ApplicationScoped
+@Deprecated
 public class ResponseAllData {
 
 
-    private List<data> dataList;
+    private List<ResponsePersonData> responsePersonDataList;
 
 
-    public List<data> getDataList() {
-        return dataList;
+    public List<ResponsePersonData> getResponsePersonDataList() {
+        return responsePersonDataList;
     }
 
-    public void setDataList(List<data> dataList) {
-        this.dataList = dataList;
+    public void setResponsePersonDataList(List<ResponsePersonData> responsePersonDataList) {
+        this.responsePersonDataList = responsePersonDataList;
     }
 }

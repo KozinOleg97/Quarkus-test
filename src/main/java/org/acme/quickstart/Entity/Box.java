@@ -18,7 +18,7 @@ public class Box extends PanacheEntity {
     public int col;
 
     @Column(nullable = false)
-    public boolean state=false;
+    public boolean occupied =false;
 
     @OneToMany(mappedBy = "box", cascade = CascadeType.ALL)
     @JsonbTransient
