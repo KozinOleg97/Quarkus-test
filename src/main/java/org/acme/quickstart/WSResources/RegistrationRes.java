@@ -10,11 +10,12 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 
-@Path("/reg")
+import org.jboss.logging.Logger;
+
+@Path("/registration")
 public class RegistrationRes {
+    private static final Logger LOG = Logger.getLogger(RegistrationRes.class);
 
     @Inject
     RegistrationHandler handler;
@@ -31,18 +32,20 @@ public class RegistrationRes {
 
                 handler.addNewAccount(requestClient);
 
-                responseClient.setNameClient(requestClient.getLogin());
-                responseClient.setToken(handler.doHash(requestClient.getPassword()));
+                responseClient.setResult(true);
+                responseClient.setComment("");
                 return Response.ok(responseClient).build();
             } else {
-                responseClient.setNameClient(requestClient.getLogin());
-                responseClient.setToken(null);
-                return Response.ok(responseClient).build();
+//                responseClient.setResult(false);
+//                responseClient.setComment("Такой логин уже занят");
+//                return Response.ok(responseClient).build();
+                return Response.status(400).build();
             }
 
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
+        } catch (Exception e) {
+            //e.printStackTrace();
+            LOG.debug("Server error (Registration)", e);
+            return Response.status(500).build();
         }
     }
 

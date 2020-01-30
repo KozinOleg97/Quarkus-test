@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @Path("/test")
-public class GreetingResource{
+public class TestResource {
 
 
 

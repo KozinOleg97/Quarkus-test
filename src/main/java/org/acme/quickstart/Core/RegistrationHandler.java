@@ -3,7 +3,7 @@ package org.acme.quickstart.Core;
 import org.acme.quickstart.Entity.Account;
 import org.acme.quickstart.Entity.PersonMainData;
 import org.acme.quickstart.Entity.Role;
-import org.acme.quickstart.Entity.Wallet;
+
 import org.acme.quickstart.Beans.Registration.RequestClient;
 import org.acme.quickstart.Beans.Registration.ResponseClient;
 
@@ -25,7 +25,7 @@ public class RegistrationHandler {
 
     final String BASE_ROLE = "client";
 
-     RegistrationHandler() {
+    RegistrationHandler() {
     }
 
 
@@ -33,27 +33,17 @@ public class RegistrationHandler {
 
     public void addNewAccount(RequestClient data) throws NoSuchAlgorithmException {
 
-
-        Wallet wallet = new Wallet();
-        wallet.is_active = true;
-        wallet.deposit = 0;
-        wallet.outlay = 0;
-        wallet.persist();
-
         PersonMainData personMainData = new PersonMainData();
-        personMainData.Name = data.getName();
-        personMainData.Surname = data.getSurname();
+        personMainData.Name = "";
+        personMainData.Surname = "";
         personMainData.persist();
 
-        byte[] hashPass = doHash(data.getLogin() + data.getPassword());
+
         Account account = new Account();
         account.login = data.getLogin();
-        account.password_hash = doHash(data.getPassword());
-        account.role = selectRole(data.getRole());
-
-        account.wallet = wallet;
+        account.password = data.getPassword();
+        account.role = selectRole(BASE_ROLE);
         account.main_data = personMainData;
-
 
         account.persist();
     }

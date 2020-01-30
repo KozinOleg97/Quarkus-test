@@ -4,26 +4,27 @@ import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class ResponseClient {
-    private byte[] token;
-    private String nameClient;
+    private boolean result;
+    private String comment;
 
 
     public ResponseClient() {
     }
 
-    public byte[] getToken() {
-        return token;
+
+    public boolean isResult() {
+        return result;
     }
 
-    public void setToken(byte[] token) {
-        this.token = token;
+    public void setResult(boolean result) {
+        this.result = result;
     }
 
-    public String getNameClient() {
-        return nameClient;
+    public String getComment() {
+        return comment;
     }
 
-    public void setNameClient(String nameClient) {
-        this.nameClient = nameClient;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

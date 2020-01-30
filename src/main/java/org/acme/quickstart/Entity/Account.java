@@ -12,8 +12,7 @@ import java.util.List;
 public class Account extends PanacheEntity {
     public String login;
     //@JsonbTransient
-    @JsonbTransient
-    public byte[] password_hash;
+
 
     @JsonbTransient
     public String password;
@@ -29,11 +28,6 @@ public class Account extends PanacheEntity {
     @JsonbTransient
     public PersonMainData main_data;
 
-
-    @ManyToOne
-    @JoinColumn
-    @JsonbTransient
-    public Wallet wallet;
 
     @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
     @JsonbTransient
