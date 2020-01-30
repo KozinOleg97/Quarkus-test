@@ -5,18 +5,18 @@ import org.acme.quickstart.Beans.Login.RequestLogin;
 import org.acme.quickstart.Beans.Login.ResponseLogin;
 import org.acme.quickstart.Entity.Account;
 
+import javax.annotation.security.PermitAll;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-@Path("log")
+@Path("auth")
 @ApplicationScoped
 public class LoginRes {
 
@@ -24,6 +24,17 @@ public class LoginRes {
     ResponseLogin responseLogin;
     @Inject
     LoginHandler handler;
+
+
+    @Path("/user")
+    @PermitAll
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response doAuth(@Context SecurityContext securityContext) {
+
+        return Response.ok(true).build();
+    }
+
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
