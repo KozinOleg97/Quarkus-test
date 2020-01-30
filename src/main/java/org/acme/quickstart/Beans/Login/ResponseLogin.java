@@ -6,7 +6,6 @@ import javax.enterprise.context.ApplicationScoped;
 public class ResponseLogin {
 
     private Boolean result;
-    private byte[] token;
     private String role;
 
 
@@ -21,13 +20,6 @@ public class ResponseLogin {
         this.result = result;
     }
 
-    public byte[] getToken() {
-        return token;
-    }
-
-    public void setToken(byte[] token) {
-        this.token = token;
-    }
 
     public String getRole() {
         return role;
