@@ -68,7 +68,7 @@ public class BoxRes {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response showFreeBoxList() {
-        List<Box> list = Box.list("occupied", true);
+        List<Box> list = Box.list("occupied", false);
         //freeBoxList.setBoxList(list);
         return Response.ok(list).build();
 
