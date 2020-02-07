@@ -4,6 +4,7 @@ package org.acme.quickstart.Beans.Box;
 public class RequestBoxAdd {
     private int row;
     private int col;
+    private Float coefficient;
 
     public int getRow() {
         return row;
@@ -19,5 +20,13 @@ public class RequestBoxAdd {
 
     public void setCol(int col) {
         this.col = col;
+    }
+
+    public Float getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(Float coefficient) {
+        this.coefficient = coefficient;
     }
 }

@@ -22,11 +22,8 @@ import java.util.List;
 public class RoleRes {
     private static final Logger LOG = Logger.getLogger(RoleRes.class);
 
-//    @Inject
-//    ResponseRoles responseRoles;
     @Inject
     RegistrationHandler handler;
-
 
 
     @Path("/show")
@@ -34,7 +31,7 @@ public class RoleRes {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response showFreeBoxList() {
+    public Response roleShow() {
         List<Role> list = Role.listAll();
 
         //responseRoles.setRoleList(list);
@@ -47,7 +44,7 @@ public class RoleRes {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response createNewDeal(@Context SecurityContext securityContext, RequestRoleChange request) {
+    public Response roleChange(@Context SecurityContext securityContext, RequestRoleChange request) {
         try {
             Account account = Account.find("login", request.getLogin()).firstResult();
 

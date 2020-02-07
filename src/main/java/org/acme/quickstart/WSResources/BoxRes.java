@@ -5,6 +5,7 @@ import org.acme.quickstart.Beans.Box.RequestBoxAdd;
 import org.acme.quickstart.Beans.Box.ResponseBoxAdd;
 import org.acme.quickstart.Core.BoxHandler;
 import org.acme.quickstart.Entity.Box;
+import org.jboss.logging.Logger;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -17,13 +18,11 @@ import java.util.List;
 
 @Path("/box")
 public class BoxRes {
+    private static final Logger LOG = Logger.getLogger(BoxRes.class);
+
 
     @Inject
-    ResponseBoxAdd boxAddRes;
-    @Inject
     BoxHandler handler;
-    //@Inject
-    //ResponseFreeBoxList freeBoxList;
 
 
     @Path("/add")
@@ -33,19 +32,23 @@ public class BoxRes {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response addBox(RequestBoxAdd request) {
+        try {
+            if (handler.checkBoxExist(request.getRow(), request.getCol())) {
 
-        if (handler.checkBoxExist(request.getRow(), request.getCol())) {
+                return Response.status(400).build();
+            } else {
 
-            boxAddRes.setResult(false);
-            boxAddRes.setComment("already_exist");
-            return Response.ok(boxAddRes).build();
-        } else {
+                if (request.getCoefficient() == null) {
+                    handler.addBox(request.getRow(), request.getCol(), 1);
+                } else {
+                    handler.addBox(request.getRow(), request.getCol(), request.getCoefficient());
+                }
 
-            handler.addBox(request.getRow(), request.getCol());
-
-            boxAddRes.setResult(true);
-            boxAddRes.setComment(null);
-            return Response.ok(boxAddRes).build();
+                return Response.ok().build();
+            }
+        } catch (Exception e) {
+            LOG.error("Server error (box/add)", e);
+            return Response.status(500).build();
         }
     }
 

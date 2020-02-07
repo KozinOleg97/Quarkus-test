@@ -18,6 +18,9 @@ public class Box extends PanacheEntity {
     public int col;
 
     @Column(nullable = false)
+    public float coefficient;
+
+    @Column(nullable = false)
     public boolean occupied =false;
 
     @OneToMany(mappedBy = "box", cascade = CascadeType.ALL)

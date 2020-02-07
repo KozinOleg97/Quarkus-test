@@ -20,12 +20,13 @@ public class BoxHandler {
     }
 
 
-    public void addBox(Integer row, Integer col) {
+    public void addBox(Integer row, Integer col, float coefficient) {
 
         Box box = new Box();
         box.row = row;
         box.col = col;
-        box.occupied = true;
+        box.occupied = false;
+        box.coefficient = coefficient;
         box.persist();
 
     }

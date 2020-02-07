@@ -26,7 +26,7 @@ public class RegistrationRes {
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response Register(RequestClient requestClient) {
+    public Response register(RequestClient requestClient) {
         try {
             if (handler.checkLogin(requestClient.getLogin())) {
 

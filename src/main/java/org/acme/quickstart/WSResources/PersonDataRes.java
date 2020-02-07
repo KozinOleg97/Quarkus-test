@@ -1,7 +1,6 @@
 package org.acme.quickstart.WSResources;
 
 import org.acme.quickstart.Beans.PersonMainData.*;
-import org.acme.quickstart.Core.LoginHandler;
 import org.acme.quickstart.Entity.*;
 
 import javax.annotation.security.PermitAll;

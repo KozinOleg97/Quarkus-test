@@ -29,7 +29,7 @@ public class AutoRes {
 
 
     @Path("/add/me")
-    @RolesAllowed("client")
+    @PermitAll
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

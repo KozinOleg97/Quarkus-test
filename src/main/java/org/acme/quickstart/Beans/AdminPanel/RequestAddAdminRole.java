@@ -1,32 +1,20 @@
 package org.acme.quickstart.Beans.AdminPanel;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class RequestAddAdminRole {
 
-    private String login;
-    private String password;
-    private String acc_to_change_login;
+    private Long acc_to_change_id;
 
-    public String getLogin() {
-        return login;
+    public RequestAddAdminRole() {
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public Long getAcc_to_change_id() {
+        return acc_to_change_id;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getAcc_to_change_login() {
-        return acc_to_change_login;
-    }
-
-    public void setAcc_to_change_login(String acc_to_change_login) {
-        this.acc_to_change_login = acc_to_change_login;
+    public void setAcc_to_change_id(Long acc_to_change_id) {
+        this.acc_to_change_id = acc_to_change_id;
     }
 }

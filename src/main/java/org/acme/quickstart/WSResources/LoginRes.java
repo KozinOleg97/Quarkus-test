@@ -1,6 +1,5 @@
 package org.acme.quickstart.WSResources;
 
-import org.acme.quickstart.Core.LoginHandler;
 import org.acme.quickstart.Beans.Login.ResponseLogin;
 
 import javax.annotation.security.PermitAll;
