@@ -34,8 +34,9 @@ public class DealsRes {
 
         Account account = Account.find("login", securityContext.getUserPrincipal().getName()).firstResult();
 
-
         Box box = Box.findById(request.getBox_id());
+
+
 
 
         box.occupied = true;
@@ -64,6 +65,8 @@ public class DealsRes {
         Deal deal = Deal.find("id", request.getDeal_id()).firstResult();
 
         deal.status = false;
+        deal.box.occupied = false;
+        deal.box.persist();
         deal.persist();
 
         return Response.ok().build();
