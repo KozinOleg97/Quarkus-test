@@ -27,7 +27,6 @@ public class AdminPanelRes {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response showAccountList(@Context SecurityContext securityContext) {
-
         return Response.ok(Account.listAll()).build();
     }
 

@@ -40,7 +40,6 @@ public class RegistrationRes {
             }
 
         } catch (Exception e) {
-            //e.printStackTrace();
             LOG.error("Server error (registration)", e);
             return Response.status(500).build();
         }

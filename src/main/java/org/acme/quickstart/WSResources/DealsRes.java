@@ -3,9 +3,9 @@ package org.acme.quickstart.WSResources;
 import org.acme.quickstart.Beans.Deals.RequestDealCreate;
 import org.acme.quickstart.Beans.Deals.RequestDealDisable;
 import org.acme.quickstart.Entity.Account;
-import org.acme.quickstart.Entity.Auto;
 import org.acme.quickstart.Entity.Box;
 import org.acme.quickstart.Entity.Deal;
+import org.jboss.logging.Logger;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -22,6 +22,7 @@ import java.util.List;
 @Path("/deal")
 @ApplicationScoped
 public class DealsRes {
+    private static final Logger LOG = Logger.getLogger(DealsRes.class);
 
 
     @Path("/create")
@@ -32,25 +33,28 @@ public class DealsRes {
     @Transactional
     public Response createNewDeal(@Context SecurityContext securityContext, RequestDealCreate request) {
 
-        Account account = Account.find("login", securityContext.getUserPrincipal().getName()).firstResult();
+        try {
+            Account account = Account.find("login", securityContext.getUserPrincipal().getName()).firstResult();
 
-        Box box = Box.findById(request.getBox_id());
-
-
-
-
-        box.occupied = true;
-        box.persist();
-
-        Deal deal = new Deal();
-        deal.account = account;
-        deal.status = true;
-        deal.box = box;
-        deal.dateTime = ZonedDateTime.now();
-        deal.persist();
+            Box box = Box.findById(request.getBox_id());
 
 
-        return Response.ok(deal).build();
+            box.occupied = true;
+            box.persist();
+
+            Deal deal = new Deal();
+            deal.account = account;
+            deal.status = true;
+            deal.box = box;
+            deal.dateTime = ZonedDateTime.now();
+            deal.persist();
+
+
+            return Response.ok(deal).build();
+        } catch (Exception e) {
+            LOG.debug("Server error (deal/create)", e);
+            return Response.status(500).build();
+        }
     }
 
 
@@ -62,14 +66,21 @@ public class DealsRes {
     @Transactional
     public Response disableDeal(@Context SecurityContext securityContext, RequestDealDisable request) {
 
-        Deal deal = Deal.find("id", request.getDeal_id()).firstResult();
+        try {
+            Deal deal = Deal.find("id", request.getDeal_id()).firstResult();
 
-        deal.status = false;
-        deal.box.occupied = false;
-        deal.box.persist();
-        deal.persist();
 
-        return Response.ok().build();
+            deal.status = false;
+            deal.end_dateTime = ZonedDateTime.now();
+            deal.box.occupied = false;
+            //deal.box.persist();
+            deal.persist();
+
+            return Response.ok().build();
+        } catch (Exception e) {
+            LOG.debug("Server error (deal/disable)", e);
+            return Response.status(500).build();
+        }
     }
 
     @Path("/show/my/active")

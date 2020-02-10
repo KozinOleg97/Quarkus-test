@@ -9,7 +9,6 @@ import javax.enterprise.context.ApplicationScoped;
 public class AutoHandler {
 
 
-
     public AutoHandler() {
     }
 

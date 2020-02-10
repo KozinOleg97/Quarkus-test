@@ -19,6 +19,13 @@ public class BoxHandler {
         return res != null;
     }
 
+    public boolean checkBoxExist(Long box_id) {
+
+        Box res = Box.findById(box_id);
+
+        return res != null;
+    }
+
 
     public void addBox(Integer row, Integer col, float coefficient) {
 

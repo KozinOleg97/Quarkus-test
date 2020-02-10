@@ -1,16 +1,13 @@
-package org.acme.quickstart.Beans.Deals;
+package org.acme.quickstart.Beans.Box;
 
 import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class RequestDealCreate {
-
+public class RequestBoxRemove {
     private Long box_id;
 
-
-    public RequestDealCreate() {
+    public RequestBoxRemove() {
     }
-
 
     public Long getBox_id() {
         return box_id;

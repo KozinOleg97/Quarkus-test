@@ -2,9 +2,11 @@ package org.acme.quickstart.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 
@@ -21,7 +23,7 @@ public class Box extends PanacheEntity {
     public float coefficient;
 
     @Column(nullable = false)
-    public boolean occupied =false;
+    public boolean occupied = false;
 
     @OneToMany(mappedBy = "box", cascade = CascadeType.ALL)
     @JsonbTransient

@@ -1,7 +1,6 @@
 package org.acme.quickstart.WSResources;
 
 import org.acme.quickstart.Beans.Roles.RequestRoleChange;
-import org.acme.quickstart.Beans.Roles.ResponseRoles;
 import org.acme.quickstart.Core.RegistrationHandler;
 import org.acme.quickstart.Entity.Account;
 import org.acme.quickstart.Entity.Role;
@@ -32,10 +31,7 @@ public class RoleRes {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public Response roleShow() {
-        List<Role> list = Role.listAll();
-
-        //responseRoles.setRoleList(list);
-        return Response.ok(list).build();
+        return Response.ok(Role.listAll()).build();
     }
 
     @Path("/change")
@@ -48,9 +44,7 @@ public class RoleRes {
         try {
             Account account = Account.find("login", request.getLogin()).firstResult();
 
-            Role role = handler.selectRole(request.getNewRole());
-
-            account.role = role;
+            account.role = handler.selectRole(request.getNewRole());
 
             account.persist();
             return Response.ok(true).build();

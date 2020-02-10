@@ -2,10 +2,9 @@ package org.acme.quickstart.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 @Entity

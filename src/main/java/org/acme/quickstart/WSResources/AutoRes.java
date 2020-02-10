@@ -1,6 +1,5 @@
 package org.acme.quickstart.WSResources;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.acme.quickstart.Beans.Auto.RequestAutoAdd;
 import org.acme.quickstart.Beans.Auto.RequestAutoAddTo;
 import org.acme.quickstart.Core.AutoHandler;

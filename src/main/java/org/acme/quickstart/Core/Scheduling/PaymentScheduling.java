@@ -1,29 +1,24 @@
 package org.acme.quickstart.Core.Scheduling;
 
 import io.quarkus.scheduler.Scheduled;
-import org.acme.quickstart.Beans.Payment.RequestPaymentIncome;
-import org.acme.quickstart.Entity.Account;
 import org.acme.quickstart.Entity.Deal;
 import org.acme.quickstart.Entity.Payment;
 
-import javax.annotation.security.RolesAllowed;
 import javax.transaction.Transactional;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.time.ZonedDateTime;
 import java.util.List;
 
 
 public class PaymentScheduling {
 
-    private final int STANDART_PAYMENT_VALUE = 100;
+    private final int STANDART_PAYMENT_VALUE = 1000;
 
-    @Scheduled(every = "60s")
+    //@Scheduled(every = "60s")
+
+    //every hour
+    @Scheduled(cron = "0 0 0/1 1/1 * ? *")
+    // every minute
+    //@Scheduled(cron = "0 0/1 * 1/1 * ? *")
     @Transactional
     public void calcWallets() {
 

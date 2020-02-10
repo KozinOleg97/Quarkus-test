@@ -25,7 +25,6 @@ public class PaymentRes {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response showPaymentList() {
-
         return Response.ok(Payment.listAll()).build();
 
     }

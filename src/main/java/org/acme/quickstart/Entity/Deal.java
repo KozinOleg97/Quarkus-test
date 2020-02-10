@@ -2,11 +2,8 @@ package org.acme.quickstart.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -19,9 +16,8 @@ public class Deal extends PanacheEntity {
 
     public ZonedDateTime dateTime;
 
-//    @ManyToOne
-//    @JoinColumn
-//    public Auto auto;
+    public ZonedDateTime end_dateTime;
+
 
     @ManyToOne
     @JoinColumn
@@ -32,7 +28,7 @@ public class Deal extends PanacheEntity {
     @JsonbTransient
     public Account account;
 
-    @OneToMany(mappedBy = "deal",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "deal", cascade = CascadeType.ALL)
     @JsonbTransient
     public List<Payment> payments;
 

@@ -1,10 +1,16 @@
 package org.acme.quickstart.Beans.Box;
 
+import javax.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class RequestBoxAdd {
     private int row;
     private int col;
     private Float coefficient;
+
+
+    public RequestBoxAdd() {
+    }
 
     public int getRow() {
         return row;

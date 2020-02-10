@@ -28,8 +28,6 @@ public class RegistrationHandler {
     }
 
 
-    //TODO add exception
-
     public void addNewAccount(RequestClient data) throws NoSuchRole {
 
         PersonMainData personMainData = new PersonMainData();

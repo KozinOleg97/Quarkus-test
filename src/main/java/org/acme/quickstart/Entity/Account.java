@@ -2,7 +2,6 @@ package org.acme.quickstart.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.List;
@@ -29,19 +28,18 @@ public class Account extends PanacheEntity {
     public PersonMainData main_data;
 
 
-    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     @JsonbTransient
     public List<Deal> deals;
 
 
-    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     @JsonbTransient
     public List<Payment> payments;
 
-    @OneToMany(mappedBy = "account",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     @JsonbTransient
     public List<Auto> autos;
-
 
 
 }
