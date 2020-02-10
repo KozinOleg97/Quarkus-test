@@ -19,7 +19,7 @@ import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
 
-@Path("auto")
+@Path("/auto")
 public class AutoRes {
     private static final Logger LOG = Logger.getLogger(AutoRes.class);
 

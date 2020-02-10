@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import java.util.List;
 
-@Path("payment")
+@Path("/payment")
 public class PaymentRes {
     private static final Logger LOG = Logger.getLogger(Payment.class);
 

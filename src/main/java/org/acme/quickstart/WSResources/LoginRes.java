@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-@Path("auth")
+@Path("/auth")
 @ApplicationScoped
 public class LoginRes {
     private static final Logger LOG = Logger.getLogger(LoginRes.class);
