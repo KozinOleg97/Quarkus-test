@@ -10,7 +10,6 @@ import java.util.List;
 @Entity
 public class Account extends PanacheEntity {
     public String login;
-    //@JsonbTransient
 
 
     @JsonbTransient
