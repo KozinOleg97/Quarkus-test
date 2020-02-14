@@ -13,8 +13,10 @@ public class PaymentScheduling {
 
     private final int STANDART_PAYMENT_VALUE = 1000;
 
-    //@Scheduled(every = "60s")
 
+    /**
+     * money outcome
+     */
     //every hour
     @Scheduled(cron = "0 0 0/1 1/1 * ? *")
     // every minute

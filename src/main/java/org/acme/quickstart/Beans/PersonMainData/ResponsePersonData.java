@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.PersonMainData;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class ResponsePersonData {
     private String  name;
     private String surname;

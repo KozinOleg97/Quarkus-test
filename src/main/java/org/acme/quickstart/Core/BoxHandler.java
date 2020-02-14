@@ -11,6 +11,12 @@ public class BoxHandler {
     BoxHandler() {
     }
 
+    /**
+     * Dose box exist
+     * @param row
+     * @param col
+     * @return
+     */
     public boolean checkBoxExist(int row, int col) {
 
         Box res = Box.find("row = ?1 and col = ?2",
@@ -19,6 +25,11 @@ public class BoxHandler {
         return res != null;
     }
 
+    /**
+     * Dose box exist
+     * @param box_id
+     * @return
+     */
     public boolean checkBoxExist(Long box_id) {
 
         Box res = Box.findById(box_id);

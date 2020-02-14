@@ -1,10 +1,11 @@
 package org.acme.quickstart.WSResources;
 
-import org.acme.quickstart.Beans.PersonMainData.*;
-import org.acme.quickstart.Entity.*;
+import org.acme.quickstart.Beans.PersonMainData.RequestChangePersonData;
+import org.acme.quickstart.Beans.PersonMainData.ResponsePersonData;
+import org.acme.quickstart.Entity.Account;
+import org.jboss.logging.Logger;
 
 import javax.annotation.security.PermitAll;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -12,14 +13,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
-import org.jboss.logging.Logger;
-
 @Path("/persondata")
 public class PersonDataRes {
     private static final Logger LOG = Logger.getLogger(PersonDataRes.class);
 
-    @Inject
-    ResponsePersonData responsePersonData;
+
 
 
     @Path("/show")
@@ -30,6 +28,7 @@ public class PersonDataRes {
 
         Account account = Account.find("login", securityContext.getUserPrincipal().getName()).firstResult();
 
+        ResponsePersonData responsePersonData = new ResponsePersonData();
         responsePersonData.setName(account.main_data.Name);
         responsePersonData.setSurname(account.main_data.Surname);
 
@@ -50,7 +49,7 @@ public class PersonDataRes {
             account.main_data.Name = request.getNewName();
             account.main_data.Surname = request.getNewSurname();
 
-            account.persist();
+            account.flush();
             return Response.ok(true).build();
 
         } catch (Exception e) {

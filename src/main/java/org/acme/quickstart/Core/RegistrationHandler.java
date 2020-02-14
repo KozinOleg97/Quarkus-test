@@ -18,10 +18,6 @@ import java.util.List;
 public class RegistrationHandler {
 
 
-    @Inject
-    ResponseClient responseClient;
-
-
     final String BASE_ROLE = "client";
 
     RegistrationHandler() {
@@ -33,7 +29,7 @@ public class RegistrationHandler {
         PersonMainData personMainData = new PersonMainData();
         personMainData.Name = "";
         personMainData.Surname = "";
-        personMainData.persist();
+        //personMainData.persist();
 
 
         Account account = new Account();
@@ -47,15 +43,8 @@ public class RegistrationHandler {
 
     public Role selectRole(String inputRole) throws NoSuchRole {
 
-        List<Role> roleList = Role.listAll();
+        Role resRole = Role.find("name", inputRole).firstResult();
 
-        Role resRole = null;
-
-        for (Role curRole : roleList) {
-            if (curRole.name.equals(inputRole)) {
-                resRole = curRole;
-            }
-        }
 
         if (resRole == null) {
             throw new NoSuchRole("Role select err", inputRole);
@@ -65,6 +54,12 @@ public class RegistrationHandler {
 
     }
 
+
+    /**
+     * dose login exist
+     * @param login
+     * @return
+     */
     public boolean checkLogin(String login) {
         long count = Account.count("login", login);
         return count == 0;

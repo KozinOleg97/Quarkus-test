@@ -4,8 +4,6 @@ import org.acme.quickstart.Beans.Login.ResponseLogin;
 import org.jboss.logging.Logger;
 
 import javax.annotation.security.PermitAll;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,12 +13,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 @Path("auth")
-@ApplicationScoped
 public class LoginRes {
     private static final Logger LOG = Logger.getLogger(LoginRes.class);
 
-    @Inject
-    ResponseLogin responseLogin;
 
 
     @Path("/user")
@@ -30,6 +25,7 @@ public class LoginRes {
     public Response doAuth(@Context SecurityContext securityContext) {
 
         try {
+            ResponseLogin responseLogin =new ResponseLogin();
             responseLogin.setResult(true);
 
             if (securityContext.isUserInRole("client")) {

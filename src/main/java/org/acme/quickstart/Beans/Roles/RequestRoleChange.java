@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.Roles;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class RequestRoleChange {
 
     private String login;

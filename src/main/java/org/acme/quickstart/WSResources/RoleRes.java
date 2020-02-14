@@ -15,7 +15,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-import java.util.List;
 
 @Path("/roles")
 public class RoleRes {
@@ -40,13 +39,15 @@ public class RoleRes {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
-    public Response roleChange(@Context SecurityContext securityContext, RequestRoleChange request) {
+    public Response roleChange( RequestRoleChange request) {
         try {
             Account account = Account.find("login", request.getLogin()).firstResult();
 
             account.role = handler.selectRole(request.getNewRole());
 
-            account.persist();
+            account.flush();
+
+
             return Response.ok(true).build();
 
         } catch (Exception e) {

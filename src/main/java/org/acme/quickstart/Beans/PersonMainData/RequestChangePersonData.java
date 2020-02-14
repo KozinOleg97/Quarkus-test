@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.PersonMainData;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class RequestChangePersonData {
 
     private String newName;

@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.AdminPanel;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class RequestAddAdminRole {
 
     private Long acc_to_change_id;

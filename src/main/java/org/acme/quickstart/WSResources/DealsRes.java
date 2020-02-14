@@ -9,7 +9,6 @@ import org.jboss.logging.Logger;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -20,7 +19,6 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 @Path("/deal")
-@ApplicationScoped
 public class DealsRes {
     private static final Logger LOG = Logger.getLogger(DealsRes.class);
 

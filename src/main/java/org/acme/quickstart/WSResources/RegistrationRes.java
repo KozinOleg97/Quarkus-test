@@ -19,8 +19,7 @@ public class RegistrationRes {
 
     @Inject
     RegistrationHandler handler;
-    @Inject
-    ResponseClient responseClient;
+
 
     @POST
     @Transactional
@@ -32,6 +31,7 @@ public class RegistrationRes {
 
                 handler.addNewAccount(requestClient);
 
+                ResponseClient responseClient = new ResponseClient();
                 responseClient.setResult(true);
                 responseClient.setComment("");
                 return Response.ok(responseClient).build();

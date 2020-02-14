@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.Login;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class ResponseLogin {
 
     private Boolean result;

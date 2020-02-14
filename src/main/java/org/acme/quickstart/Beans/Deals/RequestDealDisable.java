@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.Deals;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class RequestDealDisable {
     private Long deal_id;
 

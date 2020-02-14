@@ -1,10 +1,8 @@
 package org.acme.quickstart.Beans.Payment;
 
 
-import javax.enterprise.context.ApplicationScoped;
 import java.time.ZonedDateTime;
 
-@ApplicationScoped
 public class RequestPaymentIncome {
 
    private String description;

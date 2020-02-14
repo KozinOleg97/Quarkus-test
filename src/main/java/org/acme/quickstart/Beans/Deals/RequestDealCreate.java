@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.Deals;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class RequestDealCreate {
 
     private Long box_id;

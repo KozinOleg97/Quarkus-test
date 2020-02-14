@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.Registration;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class ResponseClient {
     private boolean result;
     private String comment;

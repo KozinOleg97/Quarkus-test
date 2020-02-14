@@ -42,7 +42,7 @@ public class AdminPanelRes {
             Account account = Account.find("id", request.getAcc_to_change_id()).firstResult();
 
             account.role = registrationHandler.selectRole("admin");
-            account.persist();
+            account.flush();
 
             return Response.ok().build();
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class AdminPanelRes {
             Account account = Account.find("id", request.getAcc_to_change_id()).firstResult();
 
             account.role = registrationHandler.selectRole("client");
-            account.persist();
+            account.flush();
 
 
             return Response.ok().build();

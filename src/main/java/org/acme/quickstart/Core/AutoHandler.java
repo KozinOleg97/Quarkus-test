@@ -19,6 +19,11 @@ public class AutoHandler {
         return res != 0;
     }
 
+    /**
+     * add new auto for user with LOGIN
+     * @param regNumber
+     * @param login
+     */
     public void addAuto(String regNumber, String login) {
 
         Account account = Account.find("login", login).firstResult();
@@ -27,6 +32,6 @@ public class AutoHandler {
         auto.reg_number = regNumber;
         auto.account = account;
 
-        auto.persist();
+        auto.flush();
     }
 }

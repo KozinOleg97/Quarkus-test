@@ -1,8 +1,5 @@
 package org.acme.quickstart.Beans.Box;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class RequestBoxRemove {
     private Long box_id;
 
