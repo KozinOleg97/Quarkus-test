@@ -38,7 +38,7 @@ public class DealsRes {
 
 
             box.occupied = true;
-            box.persist();
+
 
             Deal deal = new Deal();
             deal.account = account;
@@ -72,7 +72,7 @@ public class DealsRes {
             deal.end_dateTime = ZonedDateTime.now();
             deal.box.occupied = false;
             //deal.box.persist();
-            deal.persist();
+            deal.flush();
 
             return Response.ok().build();
         } catch (Exception e) {
